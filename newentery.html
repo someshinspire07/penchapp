@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Bootstrap Form</title>
+	<meta charset="utf-8">
+	<meta name="viewport"
+        content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+	<link rel="stylesheet" href=
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+	</script>
+	<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+	</script>
+	<script src=
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+	</script>
+</head>
+<body>
+	<h1 class="text-success text-center">
+        Task_1_Somesh
+	</h1>
+	<h2 class="text-center">Registration Form</h2>
+	<div class="container">
+		<form method="POST" name="form1">
+			<div class="form-group">
+				<label for="fname">Name</label>
+				<input type="text" class="form-control" id="txtName"
+                    placeholder="Enter Full Name" required name="name">
+                    <span id="lblError" style="color: red"></span>
+			</div>
+			<div class="form-group">
+				<label for="lname">Email</label>
+				<input type="email" name="email" class="form-control" id="lname"
+					placeholder="Enter Your Email Address" required >
+			</div>
+			<div class="form-group">
+				<label for="email">Phone Number</label>
+				<input type="number" class="form-control" id="email"
+					placeholder="Enter Your Phone Number" required name="pno">
+			</div>
+			<div class="form-group">
+				<label for="contact">Gender</label>
+                 <select aria-placeholder="Select your Gender" name="gender" required class="form-control"id="">
+                    <option value="">Select Your Gender</option>
+                     <option value="male">Male</option>
+                     <option value="female">Fe-male</option>
+                     <option value="00">Trans-Gender</option>
+                     <option value="00">Not Preffer to say</option>
+                 </select>
+            </div>
+            <div class="form-group">
+				<label for="email">Address</label>
+				<input type="text" class="form-control" id="email"
+					placeholder="Enter Your Address" required name="address">
+            </div>
+            <div class="form-group">
+				<label for="email">Hobbies</label>
+				<input type="text" class="form-control" id="email"
+					placeholder="Enter your Hobbies" required name="hobbies">
+            </div>
+            <div class="form-group">
+				<label for="email">Password</label>
+				<input type="password" class="form-control" id="email"
+					placeholder="Enter Your Password" required name="password">
+			</div>
+			<div class="container d-flex justify-content-center">			
+                <button type="submit" name="submit" id="submit" class="btn bg-success">
+				Submit
+			</button>
+			
+		</div>
+		<div class="container">
+			<div class="container d-flex justify-content-center my-2">			
+					<a href="index.php"><button type="button" name="submit" id="submit" class="btn bg-success">
+					Back to Login
+            </button></a>
+			</div>
+		</form>
+	</div>
+	
+
+	<?php
+
+		include 'dbcon.php';
+
+		if(isset($_POST['submit'])){
+			$name = $_POST['name'];
+			$email = $_POST['email'];
+			$pno = $_POST['pno'];
+			$gender = $_POST['gender'];
+			$address = $_POST['address'];
+			$hobbies = $_POST['hobbies'];
+			$password = $_POST['password'];
+			$insert = "insert into  data(name,email,pno,gender,address,hobbies,password) VALUES
+			 ('$name','$email','$pno','$gender','$address','$hobbies','$password')";
+
+			$check = mysqli_query($conn,$insert);
+
+			if($check){
+				?>
+				<script>
+					alert('Data Inserted');
+				</script>
+				<?php
+			}
+			else{
+				?>
+				<script>
+					alert('Data not inserted');
+				</script>
+				<?php
+			}
+		}
+	?>
+    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#txtName").keypress(function (e) {
+                var keyCode = e.keyCode || e.which;
+    
+                $("#lblError").html("");
+    
+                //Regex for Valid Characters i.e. Alphabets.
+                var regex = /^[A-Za-z]+$/;
+    
+                //Validate TextBox value against the Regex.
+                var isValid = regex.test(String.fromCharCode(keyCode));
+                if (!isValid) {
+                    $("#lblError").html("Only Alphabets allowed.");
+                }
+    
+                return isValid;
+            });
+        });
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+</body>
+</html>
